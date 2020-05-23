@@ -7,3 +7,4 @@ O Vraptor é um framework MVC web para desenvolvimento ágil com Java, ele é op
 Link para site do Vraptor: https://www.vraptor.org/pt/
 
 ## Diagrama do projeto
+![](/diagramaDeClasses.jpeg)

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,8 +28,8 @@ public class Venda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany
-    @JoinColumn(name = "id_venda")
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_ItemVenda")
     private List<ItemVenda> itens = new ArrayList<ItemVenda>();
     
     private Date date;

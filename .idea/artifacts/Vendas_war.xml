@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Vendas:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>Vendas</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="Vendas-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Vendas:war exploded" />
+    </root>
+  </artifact>
+</component>

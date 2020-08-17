@@ -3,16 +3,10 @@
     Created on : 17/03/2020, 21:17:52
     Author     : iftar
 --%>
-
+<%@ include file="/WEB-INF/jsp/template/header.jsp" %>      
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Adicionar Produto</title>
-    </head>
-    <body>
+
         <c:forEach var="error" items="${errors}">
             ${error.category}  ${error.message}<br />
         </c:forEach>
@@ -26,5 +20,4 @@
 
             <input type="submit" value="Salvar" />
         </form>
-    </body>
-</html>
+<%@ include file="/WEB-INF/jsp/template/footer.jsp" %>

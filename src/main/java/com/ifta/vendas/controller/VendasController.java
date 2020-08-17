@@ -7,13 +7,11 @@ package com.ifta.vendas.controller;
 
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
-import com.ifta.vendas.dao.ItemDAO;
 import com.ifta.vendas.dao.ProdutoDAO;
 import com.ifta.vendas.dao.VendaDAO;
 import com.ifta.vendas.model.ItemVenda;
 import com.ifta.vendas.model.Produto;
 import com.ifta.vendas.model.Venda;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.inject.Inject;

@@ -5,9 +5,10 @@
     <class>com.ifta.vendas.model.Venda</class>
     <class>com.ifta.vendas.model.Produto</class>
     <class>com.ifta.vendas.model.ItemVenda</class>
+    <class>com.ifta.vendas.model.Cliente</class>
+    <class>com.ifta.vendas.model.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <!--        sempre usar ?useSSL=false dps do nome do banco pq senao vai dar ruim-->
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/vendas?useSSL=false"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

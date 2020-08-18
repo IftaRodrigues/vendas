@@ -6,15 +6,9 @@
 package com.ifta.vendas.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -23,22 +17,36 @@ import javax.persistence.OneToMany;
 @Entity
 public class Cliente implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @NotNull
+    private String login;
     
+    @NotNull
+    private String senha;
+    
+    @NotNull
     private String nome;
-    private double cpf;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_venda")
-    private List<Venda> compras= new ArrayList<Venda>();
+    @NotNull
+    private String cpf;
+    
+//    @OneToMany
+//    @JoinColumn(name = "id_vendas")
+//    private List<Venda> compras= new ArrayList<Venda>();
 
-    public Long getId() {
-        return id;
+    public String getLogin() {
+        return login;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getNome() {
@@ -49,21 +57,21 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    public double getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(double cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public List<Venda> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Venda> compras) {
-        this.compras = compras;
-    }
+//    public List<Venda> getCompras() {
+//        return compras;
+//    }
+//
+//    public void setCompras(List<Venda> compras) {
+//        this.compras = compras;
+//    }
     
     
     

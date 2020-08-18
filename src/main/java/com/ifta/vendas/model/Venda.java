@@ -18,6 +18,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Named("vendaSession")
@@ -29,9 +31,11 @@ public class Venda implements Serializable {
     private Long id;
     
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_ItemVenda")
+    @JoinColumn(name = "id_ItemVendas")
     private List<ItemVenda> itens = new ArrayList<ItemVenda>();
     
+//    a anotação temporal serve para indicar se o tipo usado é apenas para Date ou Data e Hora em conjunto
+    @Temporal(TemporalType.DATE)
     private Date date;
     
     public double total(){

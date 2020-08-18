@@ -7,9 +7,8 @@ package com.ifta.vendas.dao;
 
 import com.ifta.vendas.model.Cliente;
 import java.util.List;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -17,7 +16,7 @@ import javax.persistence.Query;
  *
  * @author ifta
  */
-@Dependent
+@RequestScoped
 public class ClienteDAO {
     
     @Inject
@@ -29,7 +28,7 @@ public class ClienteDAO {
         em.getTransaction().commit();
     }
     
-    public Cliente cliente(Long id){
+    public Cliente cliente(int id){
         return em.find(Cliente.class, id);
     }
    
@@ -40,7 +39,7 @@ public class ClienteDAO {
     
     public void remove (Cliente cliente){
         em.getTransaction().begin();
-        Cliente c=em.find(Cliente.class, cliente.getId());
+        Cliente c=em.find(Cliente.class, cliente.getLogin());
         em.remove(c);
         em.getTransaction().commit();        
     }

@@ -13,22 +13,21 @@
 <%@include file="/WEB-INF/jsp/template/header.jsp" %>
 <form action="${linkTo[ClientesController].adiciona(null)}" method="POST">
 
+    <validation:validationMessage name="cliente.nome"/>
     <label for="nome">Nome:</label> 
     <input type="text" name="cliente.nome" id="nome" class="form-control" value="${cliente.nome}"/>
-    <validation:validationMessage name="cliente.nome"/>
 
+    <validation:validationMessage name="cliente.cpf"/>
     <label for="cpf">CPF:</label>
     <input type="text" name="cliente.cpf" id="cpf" class="form-control" value="${cliente.cpf}"/>
-    <validation:validationMessage name="cliente.cpf"/>
-        
+
+    <validation:validationMessage name="cliente.login"/>
     <label for="login">Login:</label>
     <input type="text" name="cliente.login" id="login" class="form-control" value="${cliente.login}"/>
-    <validation:validationMessage name="cliente.login"/>
 
-
+    <validation:validationMessage name="cliente.senha"/>
     <label for="senha">Senha:</label>
     <input type="password" name="cliente.senha" id="senha" class="form-control" />
-    <validation:validationMessage name="cliente.senha"/>
 
     <input type="submit" value="Cadastrar" class="btn"/>
 </form>

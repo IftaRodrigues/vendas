@@ -28,8 +28,8 @@ public class ClienteDAO {
         em.getTransaction().commit();
     }
     
-    public Cliente cliente(int id){
-        return em.find(Cliente.class, id);
+    public Cliente cliente(String login){
+        return em.find(Cliente.class, login);
     }
    
     public List<Cliente> listClientes(){

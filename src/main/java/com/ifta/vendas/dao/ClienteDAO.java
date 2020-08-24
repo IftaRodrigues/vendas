@@ -49,4 +49,12 @@ public class ClienteDAO {
         em.merge(cliente);
         em.getTransaction().commit();
     }
+    
+    //conta quantos clientes com o loguin, usado para validar se cliente já existe
+    public boolean containsWithLogin(String login) {
+        Long contador= em.createQuery("select count(c) from Cliente c where c.login= :login", Long.class)
+                                            .setParameter("login", login)
+                                            .getSingleResult();
+        return contador >0;
+    }
 }

@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-        <link href="<c:url value='/site.css'/>" rel="stylesheet" />    
+        <link href="<c:url value="/site.css"/>"  rel="stylesheet" />    
     </head>
     <body>
 
@@ -65,12 +65,3 @@
             <c:if test="${!empty msg}">
                 <p class="message text-success">${msg}</p>
             </c:if>
-            <%--<c:if test="${!empty errors}">
-                <div class="error text-danger">
-                    <ul>
-                        <c:forEach items="${errors}" var="e">
-                            <li${e.category} ${e.message}</li>
-                            </c:forEach>
-                    </ul>
-                </div>
-</c:if>--%>

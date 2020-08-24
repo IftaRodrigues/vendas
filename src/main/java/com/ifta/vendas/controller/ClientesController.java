@@ -8,10 +8,12 @@ package com.ifta.vendas.controller;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
+import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import com.ifta.vendas.dao.ClienteDAO;
 import com.ifta.vendas.model.Cliente;
+import com.ifta.vendas.validation.LoginAvailable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -35,15 +37,10 @@ public class ClientesController {
     public void form(){}
     
     @IncludeParameters
-    public void adiciona(@Valid Cliente cliente){
-        //Cliente c= clienteDAO.cliente(cliente.getLogin());
-        
-//        if(c !=null){
-////            falta configurar o erro na jsp
-//            validator.add(new SimpleMessage("login.invalido", "usuario ja exixte", ""));
-//            
-//        }
+    public void adiciona(@Valid @LoginAvailable Cliente cliente){
+//        validator.validate(cliente);
         validator.onErrorForwardTo(this).form();
+        
         clienteDAO.add(cliente);
         result.redirectTo(this).lista();
     }

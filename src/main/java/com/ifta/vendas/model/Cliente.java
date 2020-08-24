@@ -9,6 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -17,22 +18,22 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Cliente implements Serializable {
     @Id
-    @NotNull
+    @NotNull(message = "{obrigatorio}")
     private String login;
-    
-    @NotNull
+
+    @NotNull(message = "{obrigatorio}")
     private String senha;
-    
-    @NotNull
+
+    @NotNull(message = "{obrigatorio}")
     private String nome;
-    
-    @NotNull
+
+    @NotNull(message = "{obrigatorio}")
     private String cpf;
-    
+
 //    @OneToMany
 //    @JoinColumn(name = "id_vendas")
 //    private List<Venda> compras= new ArrayList<Venda>();
-
+    
     public String getLogin() {
         return login;
     }
@@ -72,7 +73,4 @@ public class Cliente implements Serializable {
 //    public void setCompras(List<Venda> compras) {
 //        this.compras = compras;
 //    }
-    
-    
-    
 }

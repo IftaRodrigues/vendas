@@ -1,3 +1,4 @@
 <%@attribute name="name" required="true" %>
-
-<span class="validacaoErro"> ${errors.from(name)}</span> 
+<div class="error text-danger">
+    <span class="validacaoErro"> ${errors.from(name)}</span>
+</div>

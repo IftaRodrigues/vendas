@@ -43,19 +43,31 @@
 
                 </ul>
             </div>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Você não está logado. Cadastre-se
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="${linkTo[ClientesController].form}">Pessoa Física</a>
-                            <a class="dropdown-item" href="#">Pessoa Jurídica</a>
-                        </div>
-                    </li>
-                </ul>
-            </div> 
+            <!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Você não está logado. Cadastre-se
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="${linkTo[ClientesController].form}">Pessoa Física</a>
+                                        <a class="dropdown-item" href="#">Pessoa Jurídica</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div> -->
+            <div class="navbar-brand">
+                <%-- procurar solucção para o erro <c:choose>
+<c:when test="${clienteLogado.cliente}">
+                        Olá, ${clienteLogado.cliente.login} !
+                        <a  href="${linkTo[ClientesController].logout}">Sair</a>
+                    </c:when>
+                    <c:otherwise>--%>
+                        <button class="btn"><a  href="${linkTo[ClientesController].loginForm}">Login</a></button>
+                        <button class="btn"><a  href="${linkTo[ClientesController].form}">Cadastre-se</a></button>
+                        <%-- </c:otherwise>
+</c:choose>--%>
+            </div>
         </nav>
 
 

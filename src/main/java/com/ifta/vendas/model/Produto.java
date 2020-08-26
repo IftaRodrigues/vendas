@@ -18,16 +18,16 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 public class Produto implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @NotNull(message = "{obrigatorio}")
     private String descricao;
-    
+
+    @NotNull(message = "{obrigatorio}")
     private double valor;
-    
-    
 
     public Long getId() {
         return id;
@@ -52,6 +52,5 @@ public class Produto implements Serializable {
     public void setValor(double valor) {
         this.valor = valor;
     }
-    
-    
+
 }

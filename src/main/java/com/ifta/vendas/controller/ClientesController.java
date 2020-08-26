@@ -13,6 +13,7 @@ import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
 import com.ifta.vendas.dao.ClienteDAO;
 import com.ifta.vendas.model.Cliente;
+import com.ifta.vendas.model.ClienteLogado;
 import com.ifta.vendas.validation.LoginAvailable;
 import java.util.List;
 import javax.inject.Inject;
@@ -29,24 +30,47 @@ public class ClientesController {
     private ClienteDAO clienteDAO;
 
     @Inject
+    private ClienteLogado clienteLogado;
+
+    @Inject
     private Result result;
-    
+
     @Inject
     private Validator validator;
-    
-    public void form(){}
-    
+
+    public void form() {
+    }
+
+    public void loginForm() {
+    }
+
     @IncludeParameters
-    public void adiciona(@Valid @LoginAvailable Cliente cliente){
-//        validator.validate(cliente);
+    public void adiciona(@Valid @LoginAvailable Cliente cliente) {
+        validator.validate(cliente);
         validator.onErrorForwardTo(this).form();
-        
+
         clienteDAO.add(cliente);
-        result.redirectTo(this).lista();
+        result.redirectTo(ProdutosController.class).lista();
+    }
+
+    public void login(String login, String senha) {
+        Cliente c = clienteDAO.find(login, senha);
+        if (c == null) {
+            //não conseguiu acessar properties então coloquei a mensagem diretamente
+            validator.add(new SimpleMessage("login", "Login ou senha inválidos."));
+            validator.onErrorForwardTo(this).loginForm();
+        }
+        clienteLogado.setCliente(c);
+        result.redirectTo(ProdutosController.class).lista();
     }
 
     public void lista() {
-        List<Cliente> clientes=clienteDAO.listClientes();
+        List<Cliente> clientes = clienteDAO.listClientes();
         result.include("clientes", clientes);
+    }
+
+    public void logout() {
+        clienteLogado.logout();
+        result.redirectTo(ProdutosController.class).lista();
     }
 }

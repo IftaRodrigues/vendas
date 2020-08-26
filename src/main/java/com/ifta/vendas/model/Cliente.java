@@ -8,6 +8,8 @@ package com.ifta.vendas.model;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -26,14 +28,13 @@ public class Cliente implements Serializable {
 
     @NotNull(message = "{obrigatorio}")
     private String nome;
-
+    
     @NotNull(message = "{obrigatorio}")
     private String cpf;
 
 //    @OneToMany
 //    @JoinColumn(name = "id_vendas")
 //    private List<Venda> compras= new ArrayList<Venda>();
-    
     public String getLogin() {
         return login;
     }
@@ -57,7 +58,7 @@ public class Cliente implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
     public String getCpf() {
         return cpf;
     }

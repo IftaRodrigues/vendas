@@ -10,6 +10,7 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 /**
@@ -18,43 +19,55 @@ import javax.persistence.Query;
  */
 @RequestScoped
 public class ClienteDAO {
-    
+
     @Inject
     EntityManager em;
-    
-    public void add(Cliente cliente){
+
+    public void add(Cliente cliente) {
         em.getTransaction().begin();
         em.persist(cliente);
         em.getTransaction().commit();
     }
-    
-    public Cliente cliente(String login){
+
+    public Cliente cliente(String login) {
         return em.find(Cliente.class, login);
     }
-   
-    public List<Cliente> listClientes(){
-        Query query= em.createQuery("from Cliente");
+
+    public List<Cliente> listClientes() {
+        Query query = em.createQuery("from Cliente");
         return query.getResultList();
     }
-    
-    public void remove (Cliente cliente){
+
+    public void remove(Cliente cliente) {
         em.getTransaction().begin();
-        Cliente c=em.find(Cliente.class, cliente.getLogin());
+        Cliente c = em.find(Cliente.class, cliente.getLogin());
         em.remove(c);
-        em.getTransaction().commit();        
+        em.getTransaction().commit();
     }
-    
-    public void update(Cliente cliente){
+
+    public void update(Cliente cliente) {
         em.getTransaction().begin();
         em.merge(cliente);
         em.getTransaction().commit();
     }
-    
-    //conta quantos clientes com o loguin, usado para validar se cliente já existe
+
+    //conta quantos clientes com o login, usado para validar se cliente já existe
     public boolean containsWithLogin(String login) {
-        Long contador= em.createQuery("select count(c) from Cliente c where c.login= :login", Long.class)
-                                            .setParameter("login", login)
-                                            .getSingleResult();
+        Long contador = em.createQuery("select count(c) from Cliente c where c.login= :login", Long.class)
+                .setParameter("login", login)
+                .getSingleResult();
         return contador >0;
     }
+
+    public Cliente find(String login, String senha) {
+        try {
+            return em.createQuery("select c from Cliente c where c.login= :login and c.senha= :senha", Cliente.class)
+                    .setParameter("login", login)
+                    .setParameter("senha", senha)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+    }
+    
 }

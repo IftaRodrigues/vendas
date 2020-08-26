@@ -5,15 +5,20 @@
  */
 package com.ifta.vendas.model;
 
+import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
  *
  * @author ifta
  */
-
-public class ClienteLogado {
+@SessionScoped
+@Named(value = "clienteLogado")
+public class ClienteLogado implements Serializable{
+    
+    @Inject
     private Cliente cliente;
 
     public Cliente getCliente() {
@@ -23,7 +28,8 @@ public class ClienteLogado {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
-    
-    
-    
+
+    public void logout() {
+        this.cliente=null;
+    }   
 }

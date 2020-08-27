@@ -17,6 +17,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,9 +31,13 @@ public class Venda implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @OneToMany(cascade = CascadeType.PERSIST)
+  @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "id_ItemVendas")
     private List<ItemVenda> itens = new ArrayList<ItemVenda>();
+    
+    @ManyToOne
+    @JoinColumn(name = "cliente_login")
+    private Cliente cliente;
     
 //    a anotação temporal serve para indicar se o tipo usado é apenas para Date ou Data e Hora em conjunto
     @Temporal(TemporalType.DATE)
@@ -69,6 +74,12 @@ public class Venda implements Serializable {
     public void setDate(Date date) {
         this.date = date;
     }
-    
-    
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }    
 }

@@ -43,31 +43,36 @@
 
                 </ul>
             </div>
-            <!--            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Você não está logado. Cadastre-se
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="${linkTo[ClientesController].form}">Pessoa Física</a>
-                                        <a class="dropdown-item" href="#">Pessoa Jurídica</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> -->
-            <div class="navbar-brand">
-                <%-- procurar solucção para o erro <c:choose>
-<c:when test="${clienteLogado.cliente}">
-                        Olá, ${clienteLogado.cliente.login} !
-                        <a  href="${linkTo[ClientesController].logout}">Sair</a>
+                        
+            <div style="padding-right: 70px">
+                <c:choose>
+                    <c:when test="${not empty clienteLogado.cliente}">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ${clienteLogado.cliente.login}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <form action="${linkTo[VendasController].compras(null)}" method="POST">                                        
+                                        <input type="hidden" name="login" value="${clienteLogado.cliente.login}"/>
+                                        <button class="dropdown-item" type="submit" >Minhas Compras</button>
+                                    </form>
+                                    <form action="${linkTo[ClientesController].remove(null)}" method="POST">                                        
+                                        <input type="hidden" name="login" value="${clienteLogado.cliente.login}"/>
+                                        <button class="dropdown-item" type="submit">Excluir Cadastro</button>
+                                    </form>
+                                    <a  class="dropdown-item" href="${linkTo[ClientesController].logout}">Sair</a>
+                                </div>
+                            </li>
+                        </ul>
+
                     </c:when>
-                    <c:otherwise>--%>
+                    <c:otherwise>
                         <button class="btn"><a  href="${linkTo[ClientesController].loginForm}">Login</a></button>
                         <button class="btn"><a  href="${linkTo[ClientesController].form}">Cadastre-se</a></button>
-                        <%-- </c:otherwise>
-</c:choose>--%>
-            </div>
+                    </c:otherwise>
+                </c:choose>
+            </div> 
         </nav>
 
 

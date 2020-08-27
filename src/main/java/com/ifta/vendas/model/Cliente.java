@@ -6,12 +6,14 @@
 package com.ifta.vendas.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  *
@@ -32,9 +34,9 @@ public class Cliente implements Serializable {
     @NotNull(message = "{obrigatorio}")
     private String cpf;
 
-//    @OneToMany
-//    @JoinColumn(name = "id_vendas")
-//    private List<Venda> compras= new ArrayList<Venda>();
+    @OneToMany(cascade = {CascadeType.MERGE,CascadeType.REMOVE},mappedBy = "cliente")
+    private List<Venda> compras= new ArrayList<Venda>();
+    
     public String getLogin() {
         return login;
     }
@@ -67,11 +69,11 @@ public class Cliente implements Serializable {
         this.cpf = cpf;
     }
 
-//    public List<Venda> getCompras() {
-//        return compras;
-//    }
-//
-//    public void setCompras(List<Venda> compras) {
-//        this.compras = compras;
-//    }
+    public List<Venda> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(List<Venda> compras) {
+        this.compras = compras;
+    }
 }

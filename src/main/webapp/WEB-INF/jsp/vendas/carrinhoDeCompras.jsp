@@ -7,15 +7,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<table id="produtos" border="1">
-    <thead>
-    <caption>PRODUTOS</caption>
-    <!--                <tr><th colspan="3"></th></tr>-->
-    <tr>
-        <th>Descrição</th>
-        <th>Preço</th>
-        <th>Quantidade</th>
-    </tr>
+<table id="produtos" class="table table-hover table-bordered">
+    <thead class="">
+        <legend>PRODUTOS</legend>
+        <!--                <tr><th colspan="3"></th></tr>-->
+        <tr>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
     <tbody>
         <c:forEach items="${produtoList}" var="p">
             <tr>
@@ -25,7 +26,7 @@
                     <form action="${linkTo[VendasController].adicionaItem}" method="POST">
                         <input type="hidden" name="itemVenda.produto.id" value="${p.id}"/>
                         <input type="text" name="itemVenda.qtd"/>
-                        <button type="submit">Add</button>
+                        <button type="submit" class="btn">Add</button>
                     </form>
                 </td>
             </tr>
@@ -33,39 +34,38 @@
     </tbody>
 </table>
 
-<table id="itens" border="1">
+<table id="itens" class="table table-hover">
     <thead>
-    <caption>Itens do Carrinho</caption>
-    <tr>
-        <th>Produto</th>
-        <th>Quantidade</th>
-        <th>Valor Parcial</th> 
-    </tr>
-</thead>
-<tbody>
-    <c:forEach items="${vendaSession.itens}" var="i">
+        <legend>Itens do Carrinho</legend>
         <tr>
-            <td>${i.produto.descricao}</td>
-            <td>${i.qtd}</td>
-            <td>${i.total()}</td>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Valor Parcial</th> 
         </tr>
-    </c:forEach>
+    </thead>
+    <tbody>
+        <c:forEach items="${vendaSession.itens}" var="i">
+            <tr>
+                <td>${i.produto.descricao}</td>
+                <td>${i.qtd}</td>
+                <td>${i.total()}</td>
+            </tr>
+        </c:forEach>
 
-</tbody>
-<tfoot>
-    <tr>
-
-        <td colspan="2">Total</td>
-        <td>${vendaSession.total()}</td>
-        <td>
-            <form action="${linkTo[VendasController].adicionaVenda}" method="POST">
-                   <button type="submit">Comprar</button>
-            </form>
-                
-        </td>
-    </tr>
-</tfoot>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="1">Total</td>
+            <td>${vendaSession.total()}</td>
+            <td>
+                <form action="${linkTo[VendasController].adicionaVenda(null)}" method="POST">
+                    <button type="submit" class="btn">Comprar</button>
+                    <input type="hidden" name="login" value="${clienteLogado.cliente.login}"/> 
+                </form>
+            </td>
+        </tr>
+    </tfoot>
 </table> 
-      
+
 
 <%@ include file="/WEB-INF/jsp/template/footer.jsp" %>                   

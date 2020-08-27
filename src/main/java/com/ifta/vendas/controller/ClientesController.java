@@ -8,9 +8,9 @@ package com.ifta.vendas.controller;
 import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.interceptor.IncludeParameters;
-import br.com.caelum.vraptor.validator.I18nMessage;
 import br.com.caelum.vraptor.validator.SimpleMessage;
 import br.com.caelum.vraptor.validator.Validator;
+import com.ifta.vendas.annotations.Public;
 import com.ifta.vendas.dao.ClienteDAO;
 import com.ifta.vendas.model.Cliente;
 import com.ifta.vendas.model.ClienteLogado;
@@ -38,13 +38,17 @@ public class ClientesController {
     @Inject
     private Validator validator;
 
+    @Public
     public void form() {
     }
 
+    //anotação criada para não barrar no interceptor
+    @Public
     public void loginForm() {
     }
 
     @IncludeParameters
+    @Public
     public void adiciona(@Valid @LoginAvailable Cliente cliente) {
         validator.validate(cliente);
         validator.onErrorForwardTo(this).form();
@@ -53,6 +57,7 @@ public class ClientesController {
         result.redirectTo(ProdutosController.class).lista();
     }
 
+    @Public
     public void login(String login, String senha) {
         Cliente c = clienteDAO.find(login, senha);
         if (c == null) {
@@ -71,6 +76,13 @@ public class ClientesController {
 
     public void logout() {
         clienteLogado.logout();
-        result.redirectTo(ProdutosController.class).lista();
+        result.redirectTo(this).loginForm();
+    }
+
+    public void remove(String login) {
+        Cliente c=clienteDAO.cliente(login);
+        clienteDAO.remove(c);
+        clienteLogado.logout();
+        result.redirectTo(this).form();
     }
 }

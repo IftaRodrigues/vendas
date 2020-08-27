@@ -18,7 +18,7 @@ import javax.inject.Named;
 @Named(value = "clienteLogado")
 public class ClienteLogado implements Serializable{
     
-    @Inject
+    //@Inject
     private Cliente cliente;
 
     public Cliente getCliente() {

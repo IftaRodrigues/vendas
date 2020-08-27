@@ -1,17 +1,33 @@
-<%-- 
-    Document   : lista
-    Created on : 13 de ago de 2020, 20:48:28
-    Author     : ifta
---%>
+<%@ include file="../template/header.jsp" %>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
+<c:forEach items="${vendas}" var="c">
+
+    <table class="table table-hover">
+        <legend>Cliente:${c.cliente.nome}<br/> Data: ${c.date}</legend>
+        <thead>
+            <tr>
+                <th>Descrição</th>
+                <th>Qtd.</th>
+                <th>Valor</th>
+                
+
+            </tr> 
+        </thead>
+
+        <tbody>
+            <tr>
+                <c:forEach items="${c.itens}" var="i">
+                <tr>
+                    <td>${i.produto.descricao}</td>
+                    <td>${i.qtd}</td>
+                    <td>${i.produto.valor}</td>
+                </tr>
+                </c:forEach>
+                
+            </tr>
+            <tr><th>Total</th><td>${c.total()}</td></tr>
+        </tbody>    
+
+    </table>
+</c:forEach>
+<%@ include file="../template/footer.jsp" %>
